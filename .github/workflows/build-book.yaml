@@ -48,9 +48,9 @@ jobs:
 
   build-book:
     runs-on: ubuntu-latest
-    container:
-      image: ghcr.io/kmuehlbauer/erad2022:latest
-      options: --user root
+    #container:
+    #  image: ghcr.io/kmuehlbauer/erad2022:latest
+    #  options: --user root
     needs: [build-container]
     defaults:
       run:
@@ -101,6 +101,8 @@ jobs:
           docker image ls -a
       - name: Build the book
         uses: erad2022:latest
+        with:
+          entrypoint: /srv/conda/envs/notebook/bin/bash
         run: |
           install/nbstripout_notebooks.sh
           jupyter-book build ${{ inputs.path_to_notebooks }}
