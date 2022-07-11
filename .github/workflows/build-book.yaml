@@ -100,7 +100,7 @@ jobs:
           docker load --input /tmp/erad2022.tar
           docker image ls -a
       - name: Build the book
-        image: erad2022:latest
+        uses: erad2022:latest
         run: |
           install/nbstripout_notebooks.sh
           jupyter-book build ${{ inputs.path_to_notebooks }}
