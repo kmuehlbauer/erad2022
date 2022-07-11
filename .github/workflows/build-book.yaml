@@ -40,6 +40,12 @@ jobs:
           DOCKER_PASSWORD: ${{ secrets.GITHUB_TOKEN }}
           DOCKER_REGISTRY: "ghcr.io"
           PUBLIC_REGISTRY_CHECK: true
+      - name: Upload image artifact
+        uses: actions/upload-artifact@v3
+        with:
+          name: erad2022
+          path: /tmp/erad2022.tar
+
   build-book:
     runs-on: ubuntu-latest
     container:
@@ -84,7 +90,17 @@ jobs:
 #          export BALTRAD_INSTALL_ROOT=$PWD
 #          bash -l $BALTRAD_INSTALL_ROOT/install/baltrad/install_baltrad.sh
 
+      - name: Download image artifact
+        uses: actions/download-artifact@v3
+        with:
+          name: erad2022
+          path: /tmp
+          - name: Load Docker image
+            run: |
+              docker load --input /tmp/erad2022.tar
+              docker image ls -a
       - name: Build the book
+        container: erad2022:latest
         run: |
           install/nbstripout_notebooks.sh
           jupyter-book build ${{ inputs.path_to_notebooks }}
