@@ -100,12 +100,13 @@ jobs:
           docker load --input /tmp/erad2022.tar
           docker image ls -a
       - name: Build the book
-        uses: erad2022:latest
+        uses: addnab/docker-run-action@v3
         with:
-          entrypoint: /srv/conda/envs/notebook/bin/bash
-        run: |
-          install/nbstripout_notebooks.sh
-          jupyter-book build ${{ inputs.path_to_notebooks }}
+          image: ghcr.io/kmuehlbauer/erad2022:latest
+          options: --user root
+          run: |
+            install/nbstripout_notebooks.sh
+            jupyter-book build ${{ inputs.path_to_notebooks }}
       - name: Zip the book
         run: |
           set -x
