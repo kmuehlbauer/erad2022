@@ -1,0 +1,1 @@
+FROM ghcr.io/kmuehlbauer/erad2022:latest
