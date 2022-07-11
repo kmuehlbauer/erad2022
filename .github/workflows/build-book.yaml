@@ -95,10 +95,10 @@ jobs:
         with:
           name: erad2022
           path: /tmp
-          - name: Load Docker image
-            run: |
-              docker load --input /tmp/erad2022.tar
-              docker image ls -a
+      - name: Load Docker image
+        run: |
+          docker load --input /tmp/erad2022.tar
+          docker image ls -a
       - name: Build the book
         container: erad2022:latest
         run: |
