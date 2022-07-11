@@ -44,6 +44,7 @@ jobs:
     runs-on: ubuntu-latest
     container:
       image: ghcr.io/kmuehlbauer/erad2022:latest
+      options: --user jovyan
     needs: [build-container]
     defaults:
       run:
