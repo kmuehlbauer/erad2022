@@ -25,6 +25,17 @@ on:
         type: string  # had a lot of trouble with boolean types, see https://github.com/actions/runner/issues/1483
 
 jobs:
+  build-container:
+    runs-on: ubuntu-latest
+    steps:
+      - name: checkout files in repo
+        uses: actions/checkout@main
+      - name: update jupyter dependencies with repo2docker
+        uses: jupyterhub/repo2docker-action@master
+        with: # make sure username & password/token matches your registry
+          DOCKER_USERNAME: ${{ github.actor }}
+          DOCKER_PASSWORD: ${{ secrets.GITHUB_TOKEN }}
+          DOCKER_REGISTRY: "ghcr.io"
   build:
     runs-on: ubuntu-latest
     defaults:
