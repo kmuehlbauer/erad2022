@@ -40,6 +40,8 @@ jobs:
           DOCKER_PASSWORD: ${{ secrets.GITHUB_TOKEN }}
           DOCKER_REGISTRY: "ghcr.io"
           PUBLIC_REGISTRY_CHECK: true
+      - name: tar docker image
+        run: docker save -o /tmp/erad2022.tar ghcr.io/kmuehlbauer/erad2022:latest
       - name: Upload image artifact
         uses: actions/upload-artifact@v3
         with:
