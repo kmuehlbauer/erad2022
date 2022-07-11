@@ -25,3 +25,5 @@ dependencies:
   - tar
   - libblas=*=*netlib
   - liblapacke=*=*netlib
+  - pip:
+      - sphinx-pythia-theme
