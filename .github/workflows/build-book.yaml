@@ -32,7 +32,7 @@ jobs:
         uses: actions/checkout@main
       - name: remove Dockerfile
         run: |
-          rm ~/binder/Dockerfile
+          rm /binder/Dockerfile
       - name: update jupyter dependencies with repo2docker
         uses: jupyterhub/repo2docker-action@master
         with: # make sure username & password/token matches your registry
